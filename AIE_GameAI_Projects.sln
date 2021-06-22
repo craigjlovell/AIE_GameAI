@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AIE_GameAI", "AIE_GameAI\AIE_GameAI.vcxproj", "{B253A0FC-991D-45D3-8C9E-2E37C2AAD014}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AIE_GameStateManagerDemo", "AIE_GameStateManagerDemo\AIE_GameStateManagerDemo.vcxproj", "{AE2AE092-D1D6-4EE6-888F-902C51084D8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{B253A0FC-991D-45D3-8C9E-2E37C2AAD014}.Release|x64.Build.0 = Release|x64
 		{B253A0FC-991D-45D3-8C9E-2E37C2AAD014}.Release|x86.ActiveCfg = Release|Win32
 		{B253A0FC-991D-45D3-8C9E-2E37C2AAD014}.Release|x86.Build.0 = Release|Win32
+		{AE2AE092-D1D6-4EE6-888F-902C51084D8E}.Debug|x64.ActiveCfg = Debug|x64
+		{AE2AE092-D1D6-4EE6-888F-902C51084D8E}.Debug|x64.Build.0 = Debug|x64
+		{AE2AE092-D1D6-4EE6-888F-902C51084D8E}.Debug|x86.ActiveCfg = Release|Win32
+		{AE2AE092-D1D6-4EE6-888F-902C51084D8E}.Debug|x86.Build.0 = Release|Win32
+		{AE2AE092-D1D6-4EE6-888F-902C51084D8E}.Release|x64.ActiveCfg = Release|x64
+		{AE2AE092-D1D6-4EE6-888F-902C51084D8E}.Release|x64.Build.0 = Release|x64
+		{AE2AE092-D1D6-4EE6-888F-902C51084D8E}.Release|x86.ActiveCfg = Release|Win32
+		{AE2AE092-D1D6-4EE6-888F-902C51084D8E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
