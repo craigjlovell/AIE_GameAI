@@ -168,15 +168,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Src\Application.cpp" />
+    <ClCompile Include="Src\FleeBehaviour.cpp" />
     <ClCompile Include="Src\GameObject.cpp" />
+    <ClCompile Include="Src\Graph2D.cpp" />
+    <ClCompile Include="Src\Graph2DEditor.cpp" />
     <ClCompile Include="Src\KeyBoardBehaviour.cpp" />
     <ClCompile Include="Src\main.cpp" />
+    <ClCompile Include="Src\Player.cpp" />
+    <ClCompile Include="Src\SeekBehaveiour.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Inc\Application.h" />
     <ClInclude Include="Inc\Behaviour.h" />
+    <ClInclude Include="Inc\FleeBehaviour.h" />
     <ClInclude Include="Inc\GameObject.h" />
+    <ClInclude Include="Inc\Graph.h" />
+    <ClInclude Include="Inc\Graph2D.h" />
+    <ClInclude Include="Inc\Graph2DEditor.h" />
     <ClInclude Include="Inc\KeyBoardBehaviour.h" />
+    <ClInclude Include="Inc\Player.h" />
+    <ClInclude Include="Inc\SeekBehaviour.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

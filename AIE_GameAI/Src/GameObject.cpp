@@ -8,7 +8,7 @@ GameObject::GameObject()
 
 GameObject::~GameObject()
 {
-	delete m_behaviour;
+
 }
 
 void GameObject::Update(float deltaTime)
@@ -29,7 +29,7 @@ void GameObject::Draw()
 
 	Vector2 heading = Vector2Add(m_position, m_velocity);
 
-	DrawCircle(m_position.x, m_position.y, 8, BLUE);
+	DrawCircle(m_position.x, m_position.y, 8, RED);
 	DrawLine(m_position.x, m_position.y, heading.x, heading.y, GOLD);
 }
 
@@ -77,6 +77,5 @@ void GameObject::SetFriction(const float& friction)
 
 void GameObject::SetBehaviour(Behaviour* behaviour)
 {
-	delete m_behaviour;
 	m_behaviour = behaviour;
 }
