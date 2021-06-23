@@ -169,15 +169,21 @@
   <ItemGroup>
     <ClCompile Include="Src\Application.cpp" />
     <ClCompile Include="Src\GameStateManager.cpp" />
+    <ClCompile Include="Src\HighScoreState.cpp" />
     <ClCompile Include="Src\main.cpp" />
     <ClCompile Include="Src\MenuState.cpp" />
+    <ClCompile Include="Src\PauseState.cpp" />
+    <ClCompile Include="Src\PlayState.cpp" />
     <ClCompile Include="Src\SplashState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Inc\Application.h" />
     <ClInclude Include="Inc\GameStateManager.h" />
+    <ClInclude Include="Inc\HighScoreState.h" />
     <ClInclude Include="Inc\IGameState.h" />
     <ClInclude Include="Inc\MenuState.h" />
+    <ClInclude Include="Inc\PauseState.h" />
+    <ClInclude Include="Inc\PlayState.h" />
     <ClInclude Include="Inc\SplashState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

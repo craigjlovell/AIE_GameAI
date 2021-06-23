@@ -4,12 +4,12 @@
 
 class Application;
 
-class MenuState : public IGameState
+class PlayState : public IGameState
 {
 public:
 
-	MenuState(Application *app);
-	virtual ~MenuState();
+	PlayState(Application* app);
+	virtual ~PlayState();
 
 	virtual void Load();
 	virtual void Unload();
@@ -20,6 +20,6 @@ public:
 protected:
 private:
 
-	Application *m_app;
+	Application* m_app;
 
 };
