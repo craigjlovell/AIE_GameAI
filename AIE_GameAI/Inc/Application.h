@@ -2,6 +2,7 @@
 class GameObject;
 class Graph2D;
 class Graph2DEditor;
+class GameStateManager;
 
 class Application
 {
@@ -19,6 +20,11 @@ public:
 
 	void Draw();
 
+	GameStateManager* GetGameStateManager()
+	{
+		return m_gameStateManager;
+	}
+
 
 protected:
 private:
@@ -27,11 +33,8 @@ private:
 	int m_windowHeight;
 	const char* m_windowTitle;
 
-	Graph2D* m_graph = nullptr;
-	Graph2DEditor* m_graphEditor = nullptr;
+	
 
-
-	//GameObject* m_player1 = nullptr;
-	//GameObject* m_player2 = nullptr;
+	GameStateManager* m_gameStateManager = nullptr;
 
 };

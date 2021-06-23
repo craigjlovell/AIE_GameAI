@@ -14,10 +14,19 @@ GameObject::~GameObject()
 void GameObject::Update(float deltaTime)
 {
 
+	
+
+
 	if (m_behaviour != nullptr) m_behaviour->Update(this, deltaTime);
 
 	ApplyForce(Vector2Scale(Vector2Negate(m_velocity), m_friction));
+
 	m_velocity = Vector2Add(m_velocity, Vector2Scale(m_acceleration, deltaTime));
+
+	float speed = Vector2Length(m_velocity);
+	if (speed > GetMaxSpeed())
+		m_velocity = Vector2Scale(Vector2Normalize(m_velocity), GetMaxSpeed());
+
 	m_position = Vector2Add(m_position, Vector2Scale(m_velocity, deltaTime));
 	m_acceleration = { 0, 0 };
 }
@@ -78,4 +87,24 @@ void GameObject::SetFriction(const float& friction)
 void GameObject::SetBehaviour(Behaviour* behaviour)
 {
 	m_behaviour = behaviour;
+}
+
+const float& GameObject::GetMaxSpeed() const
+{
+	return m_maxSpeed;
+}
+
+void GameObject::SetMaxSpeed(const float& speed)
+{
+	m_maxSpeed = speed;
+}
+
+const float& GameObject::GetMaxForce() const
+{
+	return m_maxForce;
+}
+
+void GameObject::SetMaxForce(const float& force)
+{
+	m_maxForce = force;
 }

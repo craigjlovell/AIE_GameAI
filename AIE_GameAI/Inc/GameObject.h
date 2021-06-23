@@ -27,12 +27,23 @@ public:
 
 	void SetBehaviour(Behaviour *behaviour);
 
+	const float& GetMaxSpeed() const;
+	void SetMaxSpeed(const float& speed);
+
+	const float& GetMaxForce() const;
+	void SetMaxForce(const float& force);
+
+
+
 protected:
 
 	Vector2 m_position = {0.0f, 0.0f};
 	Vector2 m_velocity = {0.0f, 0.0f};
 	Vector2 m_acceleration = {0.0f, 0.0f};
 	float m_friction = 0.0f;
+
+	float m_maxSpeed = { 50.0f };
+	float m_maxForce = { 50.0f };
 
 	Behaviour *m_behaviour = nullptr;
 
