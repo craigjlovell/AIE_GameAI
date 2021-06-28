@@ -1,6 +1,8 @@
 #pragma once
 #include <math.h>
 #include "raymath.h"
+#include "GameObject.h"
+
 class Vec2
 {
 public:
@@ -87,6 +89,7 @@ public:
             return Vec2(0, 0);
         return Vec2(x / len, y / len);
     }
+
     float Dot(const Vec2& rhs) const
     {
         return x * rhs.x + y * rhs.y;

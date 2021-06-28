@@ -180,6 +180,7 @@
     <ClCompile Include="Src\MenuState.cpp" />
     <ClCompile Include="Src\Player.cpp" />
     <ClCompile Include="Src\SeekBehaveiour.cpp" />
+    <ClCompile Include="Src\WanderBehaviour.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Inc\Application.h" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Inc\SeekBehaviour.h" />
     <ClInclude Include="Inc\GameScreen.h" />
     <ClInclude Include="Inc\Vec2.h" />
+    <ClInclude Include="Inc\WanderBehaviour.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

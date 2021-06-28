@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "Behaviour.h"
+#include "Vec2.h"
 
 GameObject::GameObject()
 {

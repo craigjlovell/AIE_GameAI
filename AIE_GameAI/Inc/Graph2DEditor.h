@@ -1,4 +1,5 @@
 #pragma once
+#include "Graph2D.h"
 
 class Graph2D;
 
@@ -18,6 +19,12 @@ public:
 protected:
 
 	Graph2D* m_graph;
+
+	Graph2D::Node* m_firstNode = nullptr;
+	Graph2D::Node* m_lastNode = nullptr;
+
+	std::list<Graph2D::Node*> m_path;
+
 
 private:
 };

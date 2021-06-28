@@ -4,6 +4,7 @@
 class KeyBoardBehaviour;
 class SeekBehaviour;
 class FleeBehaviour;
+class WanderBehaviour;
 
 class Player : public GameObject
 {
@@ -20,6 +21,7 @@ protected:
 	KeyBoardBehaviour* m_kbBehaviour;
 	SeekBehaviour* m_seekBehaviour;
 	FleeBehaviour* m_fleeBehaviour;
+	WanderBehaviour* m_wanderBehaviour;
 
 private:
 

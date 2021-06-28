@@ -1,5 +1,6 @@
 #include "Graph2DEditor.h"
 #include "Graph2D.h"
+#include "Vec2.h"
 
 Graph2DEditor::Graph2DEditor()
 {
@@ -13,6 +14,31 @@ Graph2DEditor::~Graph2DEditor()
 
 void Graph2DEditor::Update(float deltaTime)
 {
+	if (IsMouseButtonPressed(1))
+	{
+		auto mousePos = GetMousePosition();
+		std::vector<Graph2D::Node*> setNode;
+		m_graph->GetNearbyNodes(mousePos, 8, setNode);
+		if (m_firstNode == nullptr)
+		{
+			if (setNode.size() > 0)
+			{				
+				m_firstNode = setNode[0];
+			}
+		}
+		else if(m_lastNode == nullptr)
+		{
+			if (setNode.size() > 0)
+			{
+				m_lastNode = setNode[0];
+				m_path = m_graph->FindPath(m_firstNode, [this](auto n) {
+					return n == m_lastNode;
+				});
+				std::cout << "found path ";
+			}
+		}
+	}
+
 	if (IsMouseButtonPressed(0))
 	{
 		auto mousePos = GetMousePosition();
@@ -56,6 +82,21 @@ void Graph2DEditor::Draw()
 	for (auto nearbyNode : nearbyNodes)
 	{
 		DrawLine(mousePos.x, mousePos.y, nearbyNode->data.x, nearbyNode->data.y, DARKGREEN);
+	}
+
+	// draw the path
+	for (auto iter = m_path.begin(); iter != m_path.end(); iter++)
+	{
+		auto next = std::next(iter);
+		if (next == m_path.end())
+			break;
+
+		auto p1 = (*iter)->data;
+		auto p2 = (*next)->data;
+
+		DrawLineEx(p1, p2, 2, BLACK);
+		DrawCircle(m_lastNode->data.x, m_lastNode->data.y, 4, RED);
+		DrawCircle(m_firstNode->data.x, m_firstNode->data.y, 4, RED);
 	}
 
 }
