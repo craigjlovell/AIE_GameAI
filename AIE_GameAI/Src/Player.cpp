@@ -23,11 +23,7 @@ Player::Player()
 		});
 
 	m_wanderBehaviour = new WanderBehaviour();
-	m_wanderBehaviour->SetTargetRadius(25.0f);
-	m_wanderBehaviour->OnArrive([this]()
-		{
-			SetBehaviour(m_kbBehaviour);
-		});
+	m_wanderBehaviour->SetTargetRadius(50.0f);
 
 	SetBehaviour(m_kbBehaviour);
 }
@@ -55,10 +51,14 @@ void Player::Update(float deltaTime)
 		m_fleeBehaviour->SetTarget(GetMousePosition());
 		SetBehaviour(m_fleeBehaviour);
 	}
-	else if (KeyboardKey(IsKeyPressed(KEY_ONE)))
+	else if (IsKeyPressed(KEY_ONE))
 	{
 		m_wanderBehaviour->SetTarget(GetMousePosition());
 		SetBehaviour(m_wanderBehaviour);
+	}
+	else if (IsKeyPressed(KEY_TWO))
+	{
+		SetBehaviour(m_kbBehaviour);
 	}
 
 	GameObject::Update(deltaTime);

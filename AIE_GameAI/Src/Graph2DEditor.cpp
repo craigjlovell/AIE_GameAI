@@ -31,7 +31,7 @@ void Graph2DEditor::Update(float deltaTime)
 			if (setNode.size() > 0)
 			{
 				m_lastNode = setNode[0];
-				m_path = m_graph->FindPath(m_firstNode, [this](auto n) {
+				m_path = m_graph->FindPath(IGraph::SearchType::DIJKSTRA, m_firstNode, [this](auto n) {
 					return n == m_lastNode;
 				});
 				std::cout << "found path ";

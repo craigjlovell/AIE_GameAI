@@ -39,7 +39,11 @@ void Application::Run()
 	while (!WindowShouldClose())
 	{
 		float deltaTime = GetFrameTime();
-		Update(deltaTime);
+
+		if( !IsKeyDown(KEY_P))
+			Update(deltaTime);
+		
+		
 		Draw();
 	}
 

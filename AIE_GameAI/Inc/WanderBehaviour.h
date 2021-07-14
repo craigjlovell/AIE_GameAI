@@ -21,14 +21,13 @@ public:
 	const float& GetTragetRadius() const;
 	void SetTargetRadius(const float& radius);
 
-	void OnArrive(std::function<void()> callback);
-
 protected:
 
 	Vector2 m_target;
 	float m_targetRadius = 1.0f;
 
-	std::function<void()> m_onArriveFn;
+	Vector2 m_wanderCenter = { 0, 0 };
+	Vector2 m_wanderPoint = { 0, 0 };
 
 private:
 };

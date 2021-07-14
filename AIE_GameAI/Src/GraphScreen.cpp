@@ -52,7 +52,7 @@ void GraphScreen::Load()
 	for (auto node : m_graph->GetNodes())
 	{
 		std::vector<Graph2D::Node*> nearbyNodes;
-		m_graph->GetNearbyNodes(node->data, 60, nearbyNodes);
+		m_graph->GetNearbyNodes(node->data, 80, nearbyNodes);
 	
 		for (auto connectedNode : nearbyNodes)
 		{

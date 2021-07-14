@@ -5,6 +5,16 @@
 #include <algorithm>
 #include <functional>
 
+class IGraph
+{
+public:
+	enum class SearchType
+	{
+		BFS,
+		DIJKSTRA,
+	};
+};
+
 template<class TNodeData, class TEdgeData>
 class Graph
 {
@@ -31,9 +41,15 @@ public:
 		Node* node;
 		PFNode* parent = nullptr;
 
+		int depth = 0;
+		float gScore = 0;
+		float hScore = 0;
+
 		PFNode() {}
 		PFNode(Node* n, PFNode* p) : node(n), parent(p) {}
 	};
+
+	
 
 public:
 
@@ -105,7 +121,7 @@ public:
 		}
 	}
 
-	std::list<Node*> FindPath(Node* startNode, std::function<bool(Node* n)> processNode)
+	std::list<Node*> FindPath(IGraph::SearchType type, Node* startNode, std::function<bool(Node* n)> processNode)
 	{
 		// push sthe start node on the stack
 		std::list<PFNode*> stack;
@@ -149,13 +165,38 @@ public:
 
 			for (auto& edge : pfNode->node->connections)
 			{
+				auto childNode = edge.to;
+				float gScore = (pfNode->parent ? pfNode->parent->gScore : 0) + edge.data;
+				float hScore = 0;
+				int depth = pfNode->depth + 1;
+
 				PFNode* childPFNode = GetNodesInList(edge.to);
 
 				if (childPFNode == nullptr)
 				{
-					stack.push_back(new PFNode(edge.to, pfNode));
+					childPFNode = new PFNode(edge.to, pfNode);
+					childPFNode->gScore = gScore;
+					childPFNode->hScore = hScore;
+					childPFNode->depth = depth;
+					stack.push_back(childPFNode);
+				}
+				else if (childPFNode->gScore > gScore)
+				{
+					childPFNode->parent = pfNode;
+					childPFNode->gScore = gScore;
+					childPFNode->hScore = hScore;
+					childPFNode->depth = depth;
 				}
 			}
+
+			stack.sort([&](PFNode* a, PFNode* b) -> bool {
+				switch (type)
+				{
+				case IGraph::SearchType::DIJKSTRA: return a->gScore < b->gScore;
+				case IGraph::SearchType::BFS: return a->depth < b->depth;
+				default: return a->gScore < b->gScore;
+				}
+			});
 		}
 
 		for (auto n : visited)
@@ -164,7 +205,7 @@ public:
 		for (auto n : stack)
 			delete n;
 
-		return path;
+		return path;			
 	}
 
 protected:
