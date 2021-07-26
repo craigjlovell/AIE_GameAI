@@ -95,7 +95,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;GRAPHICS_API_OPENGL_33;PLATFORM_DESKTOP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <CompileAs>CompileAsCpp</CompileAs>
-      <AdditionalIncludeDirectories>$(SolutionDir)Raygui\src;$(SolutionDir)Raylib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)inc/;$(SolutionDir)Raygui\src;$(SolutionDir)Raylib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -113,7 +113,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <CompileAs>CompileAsCpp</CompileAs>
-      <AdditionalIncludeDirectories>$(SolutionDir)Raygui\src;$(SolutionDir)Raylib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)inc/;$(SolutionDir)Raygui\src;$(SolutionDir)Raylib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,7 +133,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;GRAPHICS_API_OPENGL_33;PLATFORM_DESKTOP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <CompileAs>CompileAsCpp</CompileAs>
-      <AdditionalIncludeDirectories>$(SolutionDir)Raygui\src;$(SolutionDir)Raylib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)inc/;$(SolutionDir)Raygui\src;$(SolutionDir)Raylib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,7 +155,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <CompileAs>CompileAsCpp</CompileAs>
-      <AdditionalIncludeDirectories>$(SolutionDir)Raygui\src;$(SolutionDir)Raylib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)inc/;$(SolutionDir)Raygui\src;$(SolutionDir)Raylib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -167,18 +167,49 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Application.cpp" />
-    <ClCompile Include="GameScreen.cpp" />
-    <ClCompile Include="GameStateManager.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="Src\Application.cpp" />
+    <ClCompile Include="Src\Assets.cpp" />
+    <ClCompile Include="Src\FleeBehaviour.cpp" />
+    <ClCompile Include="Src\GameObject.cpp" />
+    <ClCompile Include="Src\GameScreen.cpp" />
+    <ClCompile Include="Src\GameStateManager.cpp" />
+    <ClCompile Include="Src\Graph2D.cpp" />
+    <ClCompile Include="Src\Graph2DEditor.cpp" />
+    <ClCompile Include="Src\Guards.cpp" />
+    <ClCompile Include="Src\KeyboardBehaviour.cpp" />
+    <ClCompile Include="Src\main.cpp" />
+    <ClCompile Include="Src\MenuState.cpp" />
+    <ClCompile Include="Src\PauseState.cpp" />
+    <ClCompile Include="Src\Player.cpp" />
+    <ClCompile Include="Src\SeekBehaviour.cpp" />
+    <ClCompile Include="Src\WanderBehaviour.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Application.h" />
-    <ClInclude Include="GameScreen.h" />
-    <ClInclude Include="GameStateManager.h" />
-    <ClInclude Include="IGameState.h" />
-    <ClInclude Include="MenuState.h" />
+    <ClInclude Include="Inc\Application.h" />
+    <ClInclude Include="Inc\Assets.h" />
+    <ClInclude Include="Inc\Behaviour.h" />
+    <ClInclude Include="Inc\FleeBehaviour.h" />
+    <ClInclude Include="Inc\GameObject.h" />
+    <ClInclude Include="Inc\GameScreen.h" />
+    <ClInclude Include="Inc\GameStateManager.h" />
+    <ClInclude Include="Inc\Graph.h" />
+    <ClInclude Include="Inc\Graph2D.h" />
+    <ClInclude Include="Inc\Graph2DEditor.h" />
+    <ClInclude Include="Inc\Guards.h" />
+    <ClInclude Include="Inc\IGameState.h" />
+    <ClInclude Include="Inc\KeyboardBehaviour.h" />
+    <ClInclude Include="Inc\MenuState.h" />
+    <ClInclude Include="Inc\PauseState.h" />
+    <ClInclude Include="Inc\Player.h" />
+    <ClInclude Include="Inc\SeekBehaviour.h" />
+    <ClInclude Include="Inc\WanderBehaviour.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\Prison.png" />
+    <Image Include="assets\PrisonInfo.png" />
+    <Image Include="assets\test.png" />
+    <Image Include="assets\the-escapists-png-6-png-image-escapists-png-342_399.png" />
+    <Image Include="assets\the-escapists-png-6-png-image-escapists-png-342_3992.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
