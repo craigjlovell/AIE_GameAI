@@ -1,20 +1,22 @@
 #include "GameObject.h"
 #include "Behaviour.h"
 #include "Assets.h"
+#include <cmath>
+#include <cfloat>
+#include <iostream>
 
 GameObject::GameObject()
 {
-
+	
 }
 
 GameObject::~GameObject()
 {
-
+	
 }
 
 void GameObject::Update(float deltaTime)
 {
-
 	if (m_behaviour != nullptr) m_behaviour->Update(this, deltaTime);
 
 	ApplyForce(Vector2Scale(Vector2Negate(m_velocity), m_friction));
@@ -43,43 +45,37 @@ void GameObject::ApplyForce(const Vector2& force)
 	m_acceleration = Vector2Add(m_acceleration, force);
 }
 
-// Getters
 const Vector2& GameObject::GetPosition() const
 {
 	return m_position;
+}
+void GameObject::SetPosition(const Vector2& pos)
+{
+	m_position = pos;
 }
 
 const Vector2& GameObject::GetVelocity() const
 {
 	return m_velocity;
 }
+void GameObject::SetVelocity(const Vector2& vel)
+{
+	m_velocity = vel;
+}
 
 const float& GameObject::GetFriction() const
 {
 	return m_friction;
+}
+void GameObject::SetFriction(const float& friction)
+{
+	m_friction = friction;
 }
 
 Behaviour* GameObject::GetBehaviour()
 {
 	return m_behaviour;
 }
-
-// Setters
-void GameObject::SetPosition(const Vector2& pos)
-{
-	m_position = pos;
-}
-
-void GameObject::SetVelocity(const Vector2& vel)
-{
-	m_velocity = vel;
-}
-
-void GameObject::SetFriction(const float& friction)
-{
-	m_friction = friction;
-}
-
 void GameObject::SetBehaviour(Behaviour* behaviour)
 {
 	m_behaviour = behaviour;
@@ -89,7 +85,6 @@ const float& GameObject::GetMaxSpeed() const
 {
 	return m_maxSpeed;
 }
-
 void GameObject::SetMaxSpeed(const float& speed)
 {
 	m_maxSpeed = speed;
@@ -99,8 +94,16 @@ const float& GameObject::GetMaxForce() const
 {
 	return m_maxForce;
 }
-
 void GameObject::SetMaxForce(const float& force)
 {
 	m_maxForce = force;
+}
+
+BlackBoard* GameObject::GetBlackBoard()
+{
+	return m_blackboard;
+}
+void GameObject::SetBlackBoard(BlackBoard* blackboard)
+{
+	m_blackboard = blackboard;
 }

@@ -4,9 +4,15 @@
 #include <list>
 
 class Application;
+
 class GameObject;
+
+class Player;
+
 class Graph2D;
 class Graph2DEditor;
+
+class BlackBoard;
 
 enum Colours
 {
@@ -17,7 +23,8 @@ enum Colours
 	C_MAGENTA = 0xFFFF00FF,
 	C_YELLOW = 0xFF00FFFF,
 	C_WHITE = 0xFFFFFFFF,
-	C_BLACK = 0xFF000000
+	C_BLACK = 0xFF000000,
+	C_ORANGE = 0xFF277FFF
 };
 
 class GameScreen : public IGameState
@@ -29,6 +36,7 @@ public:
 
 	void BuildGraphMap();
 	void PlayerBuild(float x, float y);
+
 	GameObject* CreateGuards(Vector2 pos);
 
 	virtual void Load();
@@ -47,19 +55,26 @@ public:
 
 	void DrawColRec();
 
+	void UpdateUI(float dt);
+	void DrawUI();
+
+	Player* GetPlayer();
+	void SetPlayer(Player* player);
+
 protected:
 
 private:
-
+	
 	Application* m_app;
 
 	Graph2D* m_graph = nullptr;
 	Graph2DEditor* m_graphEditor = nullptr;
 
-	GameObject* m_player1 = nullptr;
-
+	Player* m_player1 = nullptr;
 	std::list<GameObject*> m_guards;
 
 	Camera2D m_cam;
+
+	BlackBoard* m_blackboard = nullptr;
 
 };

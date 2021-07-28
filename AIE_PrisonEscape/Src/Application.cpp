@@ -3,10 +3,14 @@
 
 #include "GameStateManager.h"
 #include "IGameState.h"
+#include "Assets.h"
+
+#include "PauseState.h"
 #include "MenuState.h"
 #include "GameScreen.h"
-#include "Assets.h"
-#include "PauseState.h"
+#include "GameOverState.h"
+
+#include "Player.h"
 
 
 Application::Application(int windowWidth, int windowHeight) :
@@ -32,6 +36,8 @@ void Application::Run()
     m_gameStateManager->SetState("Menu", new MenuState(this));
     m_gameStateManager->SetState("Game", new GameScreen(this));
     m_gameStateManager->SetState("Pause", new PauseState(this));
+    m_gameStateManager->SetState("GameOver", new GameOverState(this));
+
 
     m_gameStateManager->PushState("Menu");
 

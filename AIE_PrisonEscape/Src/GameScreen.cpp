@@ -3,13 +3,18 @@
 #include "Application.h"
 #include "GameStateManager.h"
 #include "Assets.h"
+
 #include "GameScreen.h"
+
 #include "Player.h"
 #include "Guards.h"
+
+#include "BlackBoard.h"
 
 #include "Graph2D.h"
 #include "Graph2DEditor.h"
 
+#include <string>
 
 GameScreen::GameScreen(Application* app) : m_app(app)
 {
@@ -18,6 +23,7 @@ GameScreen::GameScreen(Application* app) : m_app(app)
 
 GameScreen::~GameScreen()
 {
+	
 }
 
 void GameScreen::BuildGraphMap()
@@ -25,7 +31,6 @@ void GameScreen::BuildGraphMap()
 
 	int tilesize = 32;
 
-	delete m_graph;
 	m_graph = new Graph2D();
 
 	int numRows = ASSETS->imgGameMap.height / tilesize;
@@ -55,11 +60,11 @@ void GameScreen::BuildGraphMap()
 
 			if (color == C_CYAN) // Cyan/Aqua 			
 			{
-				CreateGuards({xPos, yPos });
+				CreateGuards({ xPos, yPos });
 			}
 		}
 	}
-
+	
 	for (auto node : m_graph->GetNodes())
 	{
 		std::vector<Graph2D::Node*> nearbyNodes;
@@ -76,27 +81,11 @@ void GameScreen::BuildGraphMap()
 	}
 }
 
-void GameScreen::PlayerBuild(float x, float y)
-{
-	m_player1 = new Player();
-	m_player1->SetPosition({ x, y });
-	m_player1->SetFriction(1.0f);
-}
-
-GameObject* GameScreen::CreateGuards(Vector2 pos)
-{
-	GameObject* guard = new Guards();
-	guard->SetPosition(pos);
-	m_guards.push_back(guard);
-
-	auto playerPos = guard->GetPosition();
-
-
-	return guard;
-}
-
 void GameScreen::Load()
 {
+
+	m_blackboard = new BlackBoard;
+
 	BuildGraphMap();
 
 	m_cam.zoom = 1;
@@ -110,18 +99,23 @@ void GameScreen::Unload()
 
 	delete m_player1;
 	m_player1 = nullptr;
+
+	delete m_graphEditor;
+	m_graphEditor = nullptr;
+
+	delete m_blackboard;
+	m_blackboard = nullptr;
 }
 
 void GameScreen::Update(float dt)
 {
 	m_player1->Update(dt);
-
+	
 	for (auto guard : m_guards)
 	{
 		guard->Update(dt);
 	}
 
-	//pause
 	if (IsKeyPressed(KEY_LEFT_SHIFT))
 	{
 		m_app->GetGameStateManager()->PopState();
@@ -134,7 +128,7 @@ void GameScreen::Update(float dt)
 void GameScreen::Draw()
 {
 	BeginMode2D(m_cam);
-	
+
 	DrawTexture(ASSETS->imgGameMap, 0, 0, WHITE);
 
 	if (IsKeyDown(KEY_TAB)) DrawTexture(ASSETS->imgGameMapInfo, 0, 0, WHITE);
@@ -148,10 +142,9 @@ void GameScreen::Draw()
 	{
 		guard->Draw();
 	}
-	
-	DrawText("Game Screen", 10, 10, 20, BLUE);
 
 	EndMode2D();
+	DrawUI();
 }
 
 void GameScreen::DrawDebugGraph()
@@ -210,15 +203,14 @@ unsigned int GameScreen::GetImagePixel(Image img, int xPos, int yPos)
 
 void GameScreen::UpdateGameCam(float dt)
 {
-	if (IsKeyDown(KEY_UP)) m_cam.target.y -= 200.0f * dt;
-	if (IsKeyDown(KEY_DOWN)) m_cam.target.y += 200.0f * dt;
-	if (IsKeyDown(KEY_LEFT)) m_cam.target.x -= 200.0f * dt;
-	if (IsKeyDown(KEY_RIGHT)) m_cam.target.x += 200.0f * dt;
-	
+	//if (IsKeyDown(KEY_UP)) m_cam.target.y -= 200.0f * dt;
+	//if (IsKeyDown(KEY_DOWN)) m_cam.target.y += 200.0f * dt;
+	//if (IsKeyDown(KEY_LEFT)) m_cam.target.x -= 200.0f * dt;
+	//if (IsKeyDown(KEY_RIGHT)) m_cam.target.x += 200.0f * dt;
 	
 	int mouseMove = GetMouseWheelMove();
 	m_cam.zoom += mouseMove;
-	//m_cam.target = m_player1->GetPosition();
+	m_cam.target = m_player1->GetPosition();
 }
 
 bool GameScreen::IsInCamView(Vector2 pos)
@@ -226,6 +218,67 @@ bool GameScreen::IsInCamView(Vector2 pos)
 	pos = GetWorldToScreen2D(pos, m_cam);
 	return !(pos.x < 0 || pos.x > GetScreenWidth() || pos.y < 0 || pos.y > GetScreenHeight());
 }
+
+void GameScreen::PlayerBuild(float x, float y)
+{
+	m_player1 = new Player(m_app, this);
+	m_player1->SetPosition({ x, y });
+	m_player1->SetFriction(1.0f);
+
+	m_player1->SetBlackBoard(m_blackboard);
+}
+
+GameObject* GameScreen::CreateGuards(Vector2 pos)
+{
+	GameObject* guard = new Guards(this);
+	guard->SetPosition(pos);
+	m_guards.push_back(guard);
+
+	guard->SetBlackBoard(m_blackboard);
+	return guard;
+}
+
+void GameScreen::DrawUI()
+{
+	DrawText("Game Screen", 10, 10, 20, BLUE);
+	DrawText(std::to_string((int)m_player1->m_timer).c_str(), 10, 50, 35, GOLD);
+
+	if (m_player1->m_lever2 == true)
+	{
+		DrawText("Guard Room is open", 10, 30, 20, RED);
+	}
+	else
+	{
+		DrawText("Guard Room is closed", 10, 30, 20, RED);
+	}
+}
+
+void GameScreen::UpdateUI(float dt)
+{
+	
+}
+
+Player* GameScreen::GetPlayer()
+{
+	return m_player1;
+}
+
+void GameScreen::SetPlayer(Player* player)
+{
+	m_player1 = player;
+}
+
+//GameObject* GameScreen::GetGuard()
+//{
+//	return m_guards;
+//}
+//
+//void GameScreen::SetGuard(GameObject* guard)
+//{
+//	m_guards = guard;
+//}
+
+
 
 
 

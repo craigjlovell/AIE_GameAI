@@ -2,6 +2,7 @@
 #include "raymath.h"
 
 class Behaviour;
+class BlackBoard;
 
 class GameObject
 {
@@ -16,15 +17,15 @@ public:
 	void ApplyForce(const Vector2& force);
 
 	const Vector2& GetPosition() const;
-	const Vector2& GetVelocity() const;
-	const float& GetFriction() const;
-
-	Behaviour* GetBehaviour();
-
 	void SetPosition(const Vector2& pos);
+
+	const Vector2& GetVelocity() const;
 	void SetVelocity(const Vector2& vel);
+
+	const float& GetFriction() const;
 	void SetFriction(const float& friction);
 
+	Behaviour* GetBehaviour();
 	void SetBehaviour(Behaviour* behaviour);
 
 	const float& GetMaxSpeed() const;
@@ -32,6 +33,9 @@ public:
 
 	const float& GetMaxForce() const;
 	void SetMaxForce(const float& force);
+
+	BlackBoard* GetBlackBoard();
+	void SetBlackBoard(BlackBoard* blackboard);
 
 protected:
 
@@ -43,9 +47,13 @@ protected:
 	float m_maxSpeed = { 100.0f };
 	float m_maxForce = { 100.0f };
 
-	Behaviour* m_behaviour = nullptr;
-
 	Vector2 m_size = { 32, 32 };
 
+	BlackBoard* m_blackboard = nullptr;
+	Behaviour* m_behaviour = nullptr;
+
 private:
+
+	
+	
 };

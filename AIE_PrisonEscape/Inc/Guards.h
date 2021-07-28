@@ -1,16 +1,23 @@
 #pragma once
 #include"GameObject.h"
 
-class KeyBoardBehaviour;
+#include "BlackBoard.h"
+#include "raylib.h"
+
 class SeekBehaviour;
-class FleeBehaviour;
 class WanderBehaviour;
+class KeyBoardBehaviour;
+
+class GameScreen;
+
+class Application;
+class BlackBoard;
 
 class Guards : public GameObject
 {
 public:
 
-	Guards();
+	Guards(GameScreen* game);
 	virtual ~Guards();
 
 	void UpdateColRect();
@@ -21,11 +28,16 @@ public:
 
 protected:
 
-	KeyBoardBehaviour* m_kbBehaviour;
 	SeekBehaviour* m_seekBehaviour;
-	FleeBehaviour* m_fleeBehaviour;
 	WanderBehaviour* m_wanderBehaviour;
+
+	KeyBoardBehaviour* m_kbBehaviour;
+
+	float m_targetRadius = 100.0f;
+	Vector2 m_target;
 
 private:
 
+	Application* m_app;
+	GameScreen* m_gamescreen;
 };

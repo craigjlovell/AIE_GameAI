@@ -169,8 +169,10 @@
   <ItemGroup>
     <ClCompile Include="Src\Application.cpp" />
     <ClCompile Include="Src\Assets.cpp" />
+    <ClCompile Include="Src\BlackBoard.cpp" />
     <ClCompile Include="Src\FleeBehaviour.cpp" />
     <ClCompile Include="Src\GameObject.cpp" />
+    <ClCompile Include="Src\GameOverState.cpp" />
     <ClCompile Include="Src\GameScreen.cpp" />
     <ClCompile Include="Src\GameStateManager.cpp" />
     <ClCompile Include="Src\Graph2D.cpp" />
@@ -188,8 +190,10 @@
     <ClInclude Include="Inc\Application.h" />
     <ClInclude Include="Inc\Assets.h" />
     <ClInclude Include="Inc\Behaviour.h" />
+    <ClInclude Include="Inc\BlackBoard.h" />
     <ClInclude Include="Inc\FleeBehaviour.h" />
     <ClInclude Include="Inc\GameObject.h" />
+    <ClInclude Include="Inc\GameOverState.h" />
     <ClInclude Include="Inc\GameScreen.h" />
     <ClInclude Include="Inc\GameStateManager.h" />
     <ClInclude Include="Inc\Graph.h" />

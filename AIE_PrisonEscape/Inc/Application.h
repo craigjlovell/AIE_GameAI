@@ -20,6 +20,10 @@ public:
 	}
 
 protected:
+
+
+	
+
 private:
 
 	int m_windowWidth;

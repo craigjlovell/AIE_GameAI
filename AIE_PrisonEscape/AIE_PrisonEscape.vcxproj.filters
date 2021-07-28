@@ -63,6 +63,12 @@
     <ClCompile Include="Src\FleeBehaviour.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Src\GameOverState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\BlackBoard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Inc\Application.h">
@@ -117,6 +123,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Inc\FleeBehaviour.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\GameOverState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\BlackBoard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
