@@ -22,3 +22,4 @@ void Graph2D::GetNearbyNodes(Vector2 position, float radius, std::vector<Graph2D
 		}
 	}
 }
+

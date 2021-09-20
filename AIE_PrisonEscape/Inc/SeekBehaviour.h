@@ -10,7 +10,7 @@ public:
 	SeekBehaviour();
 	virtual ~SeekBehaviour();
 
-	virtual void Update(GameObject* obj, float deltaTime);
+	virtual void Update(GameObject* obj, float dt);
 	virtual void Draw(GameObject* obj);
 
 	const Vector2& GetTarget() const;

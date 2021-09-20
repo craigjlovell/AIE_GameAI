@@ -28,7 +28,7 @@ void WanderBehaviour::Update(GameObject* obj, float deltaTime)
 			obj->SetVelocity(newVel);
 		}
 
-		wanderCentre = obj->GetPosition(); // Vector2Add(Vector2Scale(Vector2Normalize(obj->GetVelocity()), obj->GetMaxSpeed()), obj->GetPosition());
+		wanderCentre = Vector2Add(Vector2Scale(Vector2Normalize(obj->GetVelocity()), obj->GetMaxSpeed()), obj->GetPosition());
 
 		auto angle = (rand() % 360) * PI / 180.0f;
 
@@ -36,7 +36,7 @@ void WanderBehaviour::Update(GameObject* obj, float deltaTime)
 
 		Vector2 wp = Vector2Add(wanderCentre, displace);
 
-		m_wanderCenter = obj->GetPosition(); // wanderCentre;
+		m_wanderCenter = wanderCentre;
 		m_wanderPoint = wp;
 	}
 

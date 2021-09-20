@@ -10,6 +10,7 @@ public:
 	virtual ~Graph2D();
 
 	void GetNearbyNodes(Vector2 position, float radius, std::vector<Graph2D::Node*>& out_nodes);
+	Graph2D::Node* GetNearbyNode(Vector2 position, float radius);
 
 protected:
 private:

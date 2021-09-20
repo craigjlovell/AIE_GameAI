@@ -1,7 +1,7 @@
 #include "KeyBoardBehaviour.h"
 #include "WanderBehaviour.h"
 #include "SeekBehaviour.h"
-#include "KeyboardBehaviour.h"
+#include "FollowBehaviour.h"
 
 #include "BlackBoard.h"
 
@@ -12,7 +12,6 @@
 
 Guards::Guards(GameScreen* game) : m_gamescreen(game)
 {
-
 	m_kbBehaviour = new KeyBoardBehaviour();
 
 	m_wanderBehaviour = new WanderBehaviour();
@@ -20,9 +19,25 @@ Guards::Guards(GameScreen* game) : m_gamescreen(game)
 
 	m_seekBehaviour = new SeekBehaviour();
 	m_seekBehaviour->SetTargetRadius(25.0f);
-	
+	m_seekBehaviour->OnArrive([this]()
+		{
+			float dist = Vector2Distance(m_gamescreen->GetPlayer()->GetPosition(), GetPosition());
 
-	SetBehaviour(NULL);
+			if (dist > 30)
+			{
+				m_blackboard->IsPlayerLocKnown = false;
+			}
+			else
+			{
+				m_blackboard->playerPos = m_gamescreen->GetPlayer()->GetPosition();
+				m_gamescreen->GetPlayer()->m_timer += 1;
+				m_blackboard->IsPlayerLocKnown = true;
+			}
+
+		});
+
+	m_followBehaviour = new FollowBehaviour();
+
 }
 
 Guards::~Guards()
@@ -34,26 +49,47 @@ Guards::~Guards()
 
 }
 
-void Guards::Update(float deltaTime)
+void Guards::Update(float dt)
 {
 	UpdateColRect();
 	float dist = Vector2Distance(m_gamescreen->GetPlayer()->GetPosition(), GetPosition());
 
 	if (dist < m_targetRadius)
-	{ 
+	{
 		m_blackboard->playerPos = m_gamescreen->GetPlayer()->GetPosition();
 		m_blackboard->IsPlayerLocKnown = true;
 	}
+
+	auto currentBehaviour = GetBehaviour();
+	auto desiredBehaviour = CalBehaviour();
+
 	
-	if (m_blackboard->IsPlayerLocKnown == true && m_gamescreen->GetPlayer()->m_lever2 == true)
+	if (currentBehaviour != desiredBehaviour)
 	{
-		m_seekBehaviour->SetTarget(m_blackboard->playerPos);
-		SetBehaviour(m_seekBehaviour);
+		if (currentBehaviour != nullptr)
+			currentBehaviour->End();
+		SetBehaviour(desiredBehaviour);
+		if (desiredBehaviour != nullptr)
+			desiredBehaviour->Begin();
 	}
 
+	GameObject::Update(dt);
+}
+
+Behaviour* Guards::CalBehaviour()
+{
+	return m_followBehaviour;
 
 
-	GameObject::Update(deltaTime);
+	/*if (m_blackboard->IsPlayerLocKnown == true)
+	{
+		m_seekBehaviour->SetTarget(m_blackboard->playerPos);
+		return m_seekBehaviour;
+	}
+	else
+	{
+		return m_followBehaviour;
+	}*/
 }
 
 void Guards::Draw()
@@ -110,4 +146,9 @@ unsigned int Guards::GetImagePixel(Image img, int xPos, int yPos)
 	unsigned int* data = (unsigned int*)img.data;
 	unsigned int color = data[yPos * img.width + xPos];
 	return color;
+}
+
+void Guards::SetFollowBehaviourPath(std::vector<Vector2>& path)
+{
+	m_followBehaviour->SetPath(path);
 }

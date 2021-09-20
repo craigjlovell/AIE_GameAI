@@ -39,9 +39,6 @@
     <ClCompile Include="Src\Assets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Graph2DEditor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Graph2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -67,6 +64,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Src\BlackBoard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\FollowBehaviour.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -104,9 +104,6 @@
     <ClInclude Include="Inc\Graph2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\Graph2DEditor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Inc\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -131,6 +128,9 @@
     <ClInclude Include="Inc\BlackBoard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\FollowBehaviour.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\test.png">
@@ -146,6 +146,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="assets\the-escapists-png-6-png-image-escapists-png-342_3992.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\PrisonInfo1.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

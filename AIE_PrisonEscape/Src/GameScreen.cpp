@@ -12,7 +12,8 @@
 #include "BlackBoard.h"
 
 #include "Graph2D.h"
-#include "Graph2DEditor.h"
+
+#include "FollowBehaviour.h"
 
 #include <string>
 
@@ -40,6 +41,7 @@ void GameScreen::BuildGraphMap()
 	float yOffset = 16;
 	float spacing = tilesize;
 
+	// Create Graph Nodes
 	for (int y = 0; y < numRows; y++)
 	{
 		for (int x = 0; x < numCols; x++)
@@ -52,19 +54,10 @@ void GameScreen::BuildGraphMap()
 			{
 				m_graph->AddNode({ xPos, yPos });
 			}
-
-			if (color == C_RED) // Red
-			{
-				PlayerBuild(xPos, yPos);
-			}
-
-			if (color == C_CYAN) // Cyan/Aqua 			
-			{
-				CreateGuards({ xPos, yPos });
-			}
 		}
 	}
 	
+	// Connecting Graph Nodes (adding edges between nodes)
 	for (auto node : m_graph->GetNodes())
 	{
 		std::vector<Graph2D::Node*> nearbyNodes;
@@ -79,6 +72,55 @@ void GameScreen::BuildGraphMap()
 			m_graph->AddEdge(connectedNode, node, dist);
 		}
 	}
+
+	std::vector<Vector2> guardPath;
+
+	// Swawn game objects
+	for (int y = 0; y < numRows; y++)
+	{
+		for (int x = 0; x < numCols; x++)
+		{
+			float xPos = x * spacing + xOffset;
+			float yPos = y * spacing + yOffset;
+			auto color = GetImagePixel(ASSETS->imgGameMapInfoRaw, xPos, yPos);
+
+			if (color == C_RED) // Red
+			{
+				PlayerBuild(xPos, yPos);
+			}
+
+			if (color == C_CYAN) // Cyan/Aqua 			
+			{
+				CreateGuards({ xPos, yPos });
+			}
+
+			if (color == C_YELLOW) // Yellow
+			{
+				// todo generate a path
+				auto startNode = m_graph->GetNearbyNode({ xPos, yPos }, 32);
+				auto guardPathNodes = m_graph->FindPath(IGraph::SearchType::DIJKSTRA, startNode, [&](auto n)
+				{
+					auto nColor = GetImagePixel(ASSETS->imgGameMapInfoRaw, n->data.x, n->data.y);
+					if( Vector2Distance({ xPos, yPos }, n->data) > 100)
+						return nColor == C_BROWN;
+					return false;
+				});
+
+				guardPath.clear();
+				for (auto pathNode : guardPathNodes)
+					guardPath.push_back(pathNode->data);
+
+			}
+		}
+	}
+
+	// TODO:
+	// loop through the guards, set the path for their follow behaviour.
+	for (auto guard : m_guards)
+	{
+		guard->SetFollowBehaviourPath(guardPath);
+	}
+
 }
 
 void GameScreen::Load()
@@ -99,9 +141,6 @@ void GameScreen::Unload()
 
 	delete m_player1;
 	m_player1 = nullptr;
-
-	delete m_graphEditor;
-	m_graphEditor = nullptr;
 
 	delete m_blackboard;
 	m_blackboard = nullptr;
@@ -149,6 +188,7 @@ void GameScreen::Draw()
 
 void GameScreen::DrawDebugGraph()
 {
+
 	// drw all nodes
 	for (auto& node : m_graph->GetNodes())
 	{
@@ -230,8 +270,10 @@ void GameScreen::PlayerBuild(float x, float y)
 
 GameObject* GameScreen::CreateGuards(Vector2 pos)
 {
-	GameObject* guard = new Guards(this);
+	Guards* guard = new Guards(this);
 	guard->SetPosition(pos);
+	guard->SetMaxForce(50);
+	guard->SetMaxSpeed(50);
 	m_guards.push_back(guard);
 
 	guard->SetBlackBoard(m_blackboard);

@@ -35,8 +35,8 @@ void Assets::LoadAssets()
 	guard1 = LoadTexture("./assets/the-escapists-png-6-png-image-escapists-png-342_3992.png");
 
 	imgGameMap = LoadTexture("./assets/Prison.png");
-	imgGameMapInfo = LoadTexture("./assets/PrisonInfo1.png");
-	imgGameMapInfoRaw = LoadImage("./assets/PrisonInfo1.png");
+	imgGameMapInfo = LoadTexture("./assets/PrisonInfo.png");
+	imgGameMapInfoRaw = LoadImage("./assets/PrisonInfo.png");
 	
 }
 

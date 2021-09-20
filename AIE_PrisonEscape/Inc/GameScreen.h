@@ -8,6 +8,7 @@ class Application;
 class GameObject;
 
 class Player;
+class Guards;
 
 class Graph2D;
 class Graph2DEditor;
@@ -24,7 +25,8 @@ enum Colours
 	C_YELLOW = 0xFF00FFFF,
 	C_WHITE = 0xFFFFFFFF,
 	C_BLACK = 0xFF000000,
-	C_ORANGE = 0xFF277FFF
+	C_ORANGE = 0xFF277FFF,
+	C_BROWN = 0xFF0A254E
 };
 
 class GameScreen : public IGameState
@@ -71,7 +73,7 @@ private:
 	Graph2DEditor* m_graphEditor = nullptr;
 
 	Player* m_player1 = nullptr;
-	std::list<GameObject*> m_guards;
+	std::list<Guards*> m_guards;
 
 	Camera2D m_cam;
 

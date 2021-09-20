@@ -49,8 +49,6 @@ public:
 		PFNode(Node* n, PFNode* p) : node(n), parent(p) {}
 	};
 
-
-
 public:
 
 	Graph()
