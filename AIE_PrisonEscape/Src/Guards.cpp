@@ -78,10 +78,8 @@ void Guards::Update(float dt)
 
 Behaviour* Guards::CalBehaviour()
 {
-	return m_followBehaviour;
 
-
-	/*if (m_blackboard->IsPlayerLocKnown == true)
+	if (m_blackboard->IsPlayerLocKnown == true)
 	{
 		m_seekBehaviour->SetTarget(m_blackboard->playerPos);
 		return m_seekBehaviour;
@@ -89,7 +87,7 @@ Behaviour* Guards::CalBehaviour()
 	else
 	{
 		return m_followBehaviour;
-	}*/
+	}
 }
 
 void Guards::Draw()

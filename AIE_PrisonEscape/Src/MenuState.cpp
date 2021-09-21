@@ -5,7 +5,6 @@
 #include "GameStateManager.h"
 
 #include <iostream>
-#include "raymath.h" 
 
 MenuState::MenuState(Application* app) : m_app(app)
 {
@@ -40,5 +39,5 @@ void MenuState::Draw()
 {
 
 	DrawText("Menu", 10, 10, 20, GOLD);
-
+	DrawText("Press Space to start the game", 225, 200, 20, BLUE);
 }

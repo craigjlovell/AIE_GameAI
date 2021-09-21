@@ -102,7 +102,7 @@ void Player::Door1()
 	if (m_lever == true)
 	{
 		if (lColor == C_ORANGE || rColor == C_ORANGE || tColor == C_ORANGE || bColor == C_ORANGE)
-		{
+		{			
 			m_app->GetGameStateManager()->PopState();
 			m_app->GetGameStateManager()->PushState("GameOver");
 		}

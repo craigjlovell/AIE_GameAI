@@ -27,7 +27,7 @@ public:
 
 	float m_timer = 0;
 	bool m_lever = false;
-	bool m_lever2 = true;
+	bool m_lever2 = false;
 
 protected:
 

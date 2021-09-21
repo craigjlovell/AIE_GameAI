@@ -283,7 +283,7 @@ GameObject* GameScreen::CreateGuards(Vector2 pos)
 void GameScreen::DrawUI()
 {
 	DrawText("Game Screen", 10, 10, 20, BLUE);
-	DrawText(std::to_string((int)m_player1->m_timer).c_str(), 10, 50, 35, GOLD);
+	DrawText(std::to_string((int)m_player1->m_timer).c_str(), 10, 80, 35, GOLD);
 
 	if (m_player1->m_lever2 == true)
 	{
@@ -292,6 +292,15 @@ void GameScreen::DrawUI()
 	else
 	{
 		DrawText("Guard Room is closed", 10, 30, 20, RED);
+	}
+
+	if (m_player1->m_lever == true)
+	{
+		DrawText("Escape Door is now open", 10, 50, 20, RED);
+	}
+	else
+	{
+		DrawText("Escape Door is now closed", 10, 50, 20, RED);
 	}
 }
 
@@ -309,16 +318,6 @@ void GameScreen::SetPlayer(Player* player)
 {
 	m_player1 = player;
 }
-
-//GameObject* GameScreen::GetGuard()
-//{
-//	return m_guards;
-//}
-//
-//void GameScreen::SetGuard(GameObject* guard)
-//{
-//	m_guards = guard;
-//}
 
 
 

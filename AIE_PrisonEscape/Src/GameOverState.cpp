@@ -26,12 +26,27 @@ void GameOverState::Unload()
 
 void GameOverState::Update(float dt)
 {
-
+	if (IsPointInBox(menuRec, GetMousePosition()) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+	{
+		m_app->GetGameStateManager()->PopState();
+		m_app->GetGameStateManager()->PushState("Menu");
+	}
 }
 
 void GameOverState::Draw()
 {
 	DrawText("GameOver", 10, 10, 20, BLUE);
+
+	if (IsPointInBox(menuRec, GetMousePosition()))
+	{
+		DrawRectangleRec(menuRec, GOLD);
+	}
+	else
+	{
+		DrawRectangleRec(menuRec, RED);
+	}
+
+	DrawText("Menu", menuRec.x + menuRec.width / 2 - 65, menuRec.y + menuRec.height / 2 - 20, 50, BLACK);
 }
 
 bool GameOverState::IsPointInBox(Rectangle rect, Vector2 point)// move to math lib

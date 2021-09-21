@@ -26,19 +26,19 @@ void FollowBehaviour::Update(GameObject* obj, float dt)
 		if (dist < closestDistance)
 		{
 			closestDistance = dist;
-			closestPathIndex = i + m_pathDir;
-
-			if (closestPathIndex >= m_path.size())
-			{
-				closestPathIndex = m_path.size() - 1;
-				m_pathDir = -1;
-			}
-			else if (closestPathIndex < 0)
-			{
-				closestPathIndex = 1;
-				m_pathDir = 1;
-			}
+			closestPathIndex = i + m_pathDir;			
 		}
+	}
+
+	if (closestPathIndex >= (int)m_path.size())
+	{
+		closestPathIndex = m_path.size() - 1;
+		m_pathDir = -1;
+	}
+	else if (closestPathIndex < 0)
+	{
+		closestPathIndex = 0;
+		m_pathDir = 1;
 	}
 
 	std::cout << closestPathIndex << std::endl;
@@ -56,7 +56,10 @@ void FollowBehaviour::Draw(GameObject* obj)
 {
 	for (auto pathpoint : m_path)
 	{
-		DrawCircle(pathpoint.x, pathpoint.y, 10, PINK);
+		if (IsKeyDown(KEY_Z))
+		{
+			DrawCircle(pathpoint.x, pathpoint.y, 10, PINK);
+		}
 	}
 }
 
